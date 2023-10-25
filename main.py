@@ -9,9 +9,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-# Your link to zulip
-LINK = "*****#all_messages"   # All messages!
-
 # Get variables from config file.
 config = configparser.ConfigParser()
 config.read('config.cfg')
@@ -21,7 +18,7 @@ LOG_IN_USERNAME = config.get('Keys', 'LOG_IN_USERNAME')
 LOG_IN_PASSWORD = config.get('Keys', 'LOG_IN_PASSWORD')
 TARGET_USER = config.get('Keys', 'TARGET_USER')
 DEBUGGING = config.get('Settings', 'DEBUGGING')
-
+LINK = config.get('Link', 'LINK')
 
 # Configure logging
 logging.basicConfig(
@@ -29,6 +26,8 @@ logging.basicConfig(
     format='%(asctime)s [%(levelname)s] - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
+
+
 
 # Set chrome to ""Background mode"
 chrome_options = Options()
