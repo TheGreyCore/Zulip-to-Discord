@@ -1,3 +1,5 @@
+# Not actual branch for linux... in updating process
+
 # Zulip to Discord
 
 This scirpt is created to transfer new messages from Zulip to Discord. For fetching messages it use selenium. The answer for question why, is because in my situation I don`t have direct access to manage bots on Zulip.
