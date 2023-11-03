@@ -28,7 +28,6 @@ logging.basicConfig(
 )
 
 
-
 # Set chrome to ""Background mode"
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
@@ -54,7 +53,6 @@ chrome_options.add_experimental_option('prefs', {
 
 # Start driver
 driver = webdriver.Chrome(options=chrome_options)
-
 
 try:
     if __name__ == "__main__":
@@ -90,6 +88,7 @@ def loginToZulip():
 # Fetch to get last message
 # Return data in format (Last Topic, Last Sender, Last Message)
 def fetchLastMessage():
+    global driver
     try:
         logging.info("Trying to fetch information...")
         # Check for new messages
@@ -111,6 +110,14 @@ def fetchLastMessage():
     except IndexError as e:
         logging.warning(e)
         fetchLastMessage()
+    except Exception as e:
+        if driver:
+            driver.quit()
+        driver = webdriver.Chrome(options=chrome_options)
+        loginToZulip()
+        fetchLastMessage()
+        logging.error(e)
+        logging.info("Restarting chrome...")
 
 
 # Main function
